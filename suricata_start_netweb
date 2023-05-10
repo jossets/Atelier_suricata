@@ -1,0 +1,11 @@
+#!/usr/bin/bash 
+
+rulefile=""
+if [ ! -z "$1" ] 
+then    
+    filepath=`realpath $1`
+    echo "Using rule file: $filepath"
+    rulefile=" -v $filepath:/var/lib/suricata/rules/my.rules "
+fi
+
+docker run --rm  -it --net=container:ctf-sqli --cap-add=NET_ADMIN --cap-add=NET_RAW $rulefile --name=suri_web suricata3

@@ -1,0 +1,17 @@
+# Ping google DNS
+alert icmp $HOME_NET any -> 8.8.8.8 any (msg:"TEST ping google"; classtype:not-suspicious; sid:1; rev:1;)
+
+# Any tcp connection to SQL server from Attacker
+alert ip  192.168.16.250 any -> any 3306 (msg:"SQL port from Known Attacker"; classtype:bad-unknown; sid:1001; rev:1;)
+
+# Any SQL SELECT to SQL server from Attacker
+alert ip  192.168.16.250 any -> any 3306 (msg:"SQL SELECT from Known Attacker"; classtype:bad-unknown; content:"SELECT"; sid:1002; rev:1;)
+
+# Any SQL SELECT to SQL server
+alert ip any any -> any 3306 (msg:"SQL SELECT from unknown Attacker"; classtype:bad-unknown; content:"SELECT"; sid:1003; rev:1;)
+
+# Any SQLi to Web server
+alert ip any any -> any 80 (msg:"SQLi to Web server"; classtype:bad-unknown; content:"SELECT"; sid:1004; rev:1;)
+
+# Sqlmap probe
+alert ip any any -> any 80 (msg:"SQLMap"; classtype:bad-unknown; content:"sqlmap.org"; sid:1005; rev:1;)

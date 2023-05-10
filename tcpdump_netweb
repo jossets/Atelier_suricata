@@ -1,0 +1,1 @@
+docker run --rm  -it --net=container:ctf-sqli suricata3 tcpdump $@

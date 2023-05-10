@@ -1,0 +1,24 @@
+version: '2'
+
+
+services:
+     
+      
+  suricata:
+    build: .
+    container_name: suricata3
+    image: suricata3
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+      - SYS_NICE
+    networks:
+      sqliLAN:
+        ipv4_address: 192.168.16.13
+    volumes:
+      - ./logs:/var/log/suricata
+      - ./rules/my.rules:/var/lib/suricata/rules/my.rules
+
+networks:
+  sqliLAN:
+    external: true

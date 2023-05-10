@@ -1,0 +1,2 @@
+# Web port 80
+alert tcp any any -> any 80 (msg:"Web request"; classtype:not-suspicious; sid:1010; rev:1;)
